@@ -1,8 +1,8 @@
 import time
 from selenium import webdriver
-from selenium.webdriver.common.by import By # 브라우저 접속 기다리기
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC # 어떤 상태까지 기다리겠다(페이지 클릭이나 커서 이동)
+from selenium.webdriver.support import expected_conditions as EC
 from collections import defaultdict
 
 
@@ -56,11 +56,6 @@ elements = wait.until(EC.presence_of_all_elements_located((By.CLASS_NAME, 'Card_
 postings = driver.find_elements_by_css_selector("[aria-label='position link']")
 links = [post.get_attribute('href') for post in postings]
 
-# postings = driver.find_elements_by_class_name("Card_className__u5rsb")
-
-# 테스트용 - 처음 100개만 가져오기
-# links = links[:200]
-
 two_dim_list = []  #전체 리스트
 error_dict = defaultdict(list)  #에러 나는 링크 수집
 
@@ -69,6 +64,17 @@ def scrape_text(selector, method, link):
     #selector = xpath or class name
     #method = 'class_name' / 'xpath'
     #link = page link
+
+    if method == 'xpath':
+        try:
+            result_text = driver.find_element_by_xpath(selector).text
+            return result_text
+        except:
+            error_dict[selector].append(link)
+
+    else:
+        return "method error"
+
 
     # if selector == TITLE_CLASS:
     #     try:
@@ -84,48 +90,25 @@ def scrape_text(selector, method, link):
     #     except:
     #         error_dict[selector].append(link)
 
-    if method == 'xpath':
-        try:
-            result_text = driver.find_element_by_xpath(selector).text
-            return result_text
-        except:
-            error_dict[selector].append(link)
-
-    else:
-        return "method error"
-
 
 for link in links:
     driver.get(link)  #해당 페이지로 이동
     post_list = []  #각 포스팅 하나당 리스트 하나 생성
 
     #회사 정보 크롤링
-    job_title = scrape_text(TITLE_XPATH, 'xpath', link)
-    company_name = scrape_text(COMPANY_NAME_XPATH, 'xpath', link)
-    location = scrape_text(LOCATION_XPATH, 'xpath', link)
-
-    # company_name = driver.find_element_by_xpath(COMPANY_NAME_XPATH).text  #회사명
-    # location = driver.find_element_by_xpath(LOCATION_XPATH).text  #근무지 (ex: 서울.한국)
+    job_title = scrape_text(TITLE_XPATH, 'xpath', link) #포지션명
+    company_name = scrape_text(COMPANY_NAME_XPATH, 'xpath', link)  #회사명
+    location = scrape_text(LOCATION_XPATH, 'xpath', link) #근무지 (ex: 서울.한국)
 
     #공고 본문 크롤링
-    intro = scrape_text(INTRO_XPATH, 'xpath', link)
-    main_task = scrape_text(MAIN_TASK_XPATH, 'xpath', link)
-    requirements = scrape_text(REQUIREMENTS_XPATH, 'xpath', link)
-    prefer = scrape_text(PREFER_XPATH, 'xpath', link)
-    benefits = scrape_text(BENEFITS_XPATH, 'xpath', link)
-
-    # intro = driver.find_element_by_xpath(INTRO_XPATH).text
-    # main_task = driver.find_element_by_xpath(MAIN_TASK_XPATH).text  #주요업무
-    # requirements = driver.find_element_by_xpath(REQUIREMENTS_XPATH).text  #자격요건
-    # prefer = driver.find_element_by_xpath(PREFER_XPATH).text  #우대사항
-    # benefits = driver.find_element_by_xpath(BENEFITS_XPATH).text  #혜택 및 복지
-
-    #location parsing
-    # city, country = location.split('.')
+    intro = scrape_text(INTRO_XPATH, 'xpath', link) #직무 소개
+    main_task = scrape_text(MAIN_TASK_XPATH, 'xpath', link) #주요업무
+    requirements = scrape_text(REQUIREMENTS_XPATH, 'xpath', link) #자격요건
+    prefer = scrape_text(PREFER_XPATH, 'xpath', link) #우대사항
+    benefits = scrape_text(BENEFITS_XPATH, 'xpath', link) #혜택 및 복지
 
     post_list += [job_title, company_name, location, intro, main_task, requirements, prefer, benefits]
     two_dim_list.append(post_list)
-
 
 print(len(two_dim_list)) #scraping 완료된 전체 채용공고 갯수 확인
 
