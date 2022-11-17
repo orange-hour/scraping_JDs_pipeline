@@ -115,7 +115,6 @@ print(len(two_dim_list)) #scraping 완료된 전체 채용공고 갯수 확인
 import csv
 
 # two_dim_list를 CSV 파일로 저장하기
-
 file_columns = ['포지션명', '회사명', '근무지', '직무 소개', 
 '주요 업무', '자격요건', '우대사항', '혜택 및 복지']
 
