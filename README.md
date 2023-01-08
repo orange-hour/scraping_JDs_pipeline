@@ -52,28 +52,22 @@
 
 ### 프로젝트 구현 내용
 
-(수정 및 이미지 추가 필요)
-
-*스크래퍼 작동 방식*
+**스크래퍼 작동 방식**
 1. 원티드에서 특정 카테고리의 채용공고만 선택한 웹사이트 링크로 접속 
 2. 해당 페이지 끝까지 스크롤
 3. 해당 페이지 내 존재하는 채용공고의 링크 정보 수집 (list로 저장)
 4. list에 저장된 링크 각각에 접속하여 아래 정보 스크래핑
 • 포지션명, 회사명, 근무지, 직무 소개, 주요 업무, 자격요건, 우대사항, 혜택 및 복지 
-5. 링크에 모두 접속하고 나면 스크래핑한 정보를 로컬 저장소에 별도의 csv 파일로 저장
+5. list 안의 링크에 모두 접속하고 나면 스크래핑한 정보를 로컬 저장소에 별도의 csv 파일로 저장
 
 
-![CP1_AI14_홍석원_결과보고서_pdfver_page-0006](https://user-images.githubusercontent.com/46596653/211158483-c715cafe-ee0c-4750-9353-792d3b61eeb7.jpg)
-![CP1_AI14_홍석원_결과보고서_pdfver_page-0007](https://user-images.githubusercontent.com/46596653/211158484-3e27a93e-7c4d-4f47-97cf-3131bc0ec329.jpg)
-![CP1_AI14_홍석원_결과보고서_pdfver_page-0008](https://user-images.githubusercontent.com/46596653/211158487-d1ec660e-4ee3-453e-aea0-0de6b0221af1.jpg)
+![page-0006](https://user-images.githubusercontent.com/46596653/211158483-c715cafe-ee0c-4750-9353-792d3b61eeb7.jpg)
+![page-0007](https://user-images.githubusercontent.com/46596653/211158484-3e27a93e-7c4d-4f47-97cf-3131bc0ec329.jpg)
+![page-0008](https://user-images.githubusercontent.com/46596653/211158487-d1ec660e-4ee3-453e-aea0-0de6b0221af1.jpg)
 
 
-![CP1_AI14_홍석원_결과보고서_pdfver_page-0009](https://user-images.githubusercontent.com/46596653/211158557-6b330996-f3a3-421b-8d2c-0e42cacd5b34.jpg)
-![CP1_AI14_홍석원_결과보고서_pdfver_page-0010](https://user-images.githubusercontent.com/46596653/211158558-5e6e06b9-ba84-413c-b761-3e0da270993d.jpg)
-
-
-
-<img width="1243" alt="image" src="https://user-images.githubusercontent.com/46596653/211158461-2be910a1-338b-4e7d-9490-9c229a2fc6b1.png">
+![page-0009](https://user-images.githubusercontent.com/46596653/211158557-6b330996-f3a3-421b-8d2c-0e42cacd5b34.jpg)
+![page-0010](https://user-images.githubusercontent.com/46596653/211158558-5e6e06b9-ba84-413c-b761-3e0da270993d.jpg)
 
 
 
